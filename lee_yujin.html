@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이유진(선생님) - 나무위키</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", sans-serif;
+            background-color: #fff;
+            color: #000;
+            line-height: 1.7;
+        }
+
+        /* 헤더 */
+        .top-bar {
+            background-color: #1bb57b;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* 메인 컨텐츠 */
+        .main-container {
+            max-width: 1400px;
+            margin: 70px auto 0;
+            padding: 0 20px;
+        }
+
+        .content-wrapper {
+            background: white;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .title-section {
+            padding: 30px 30px 20px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .page-info {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .action-bar {
+            display: flex;
+            gap: 10px;
+            padding: 15px 30px;
+            border-bottom: 1px solid #e6e6e6;
+            background: #fafafa;
+        }
+
+        .action-btn {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #333;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .action-btn:hover {
+            background: #f5f5f5;
+        }
+
+        /* 분류 */
+        .category-section {
+            padding: 15px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .category-label {
+            font-size: 13px;
+            color: #666;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .category-link {
+            color: #1bb57b;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .category-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 컨텐츠 영역 */
+        .content-area {
+            padding: 30px;
+        }
+
+        .wiki-heading {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 30px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #1bb57b;
+        }
+
+        .wiki-heading:first-child {
+            margin-top: 0;
+        }
+
+        .wiki-heading .edit-btn {
+            font-size: 12px;
+            color: #1bb57b;
+            text-decoration: none;
+            margin-left: 8px;
+            font-weight: normal;
+        }
+
+        .wiki-paragraph {
+            margin: 12px 0;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .wiki-list {
+            margin: 15px 0 15px 30px;
+        }
+
+        .wiki-list li {
+            margin: 8px 0;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .internal-link {
+            color: #1bb57b;
+            text-decoration: none;
+        }
+
+        .internal-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 인물 정보 박스 */
+        .infobox {
+            float: right;
+            width: 280px;
+            background: #f8f9fa;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+            margin: 0 0 20px 20px;
+            overflow: hidden;
+        }
+
+        .infobox-title {
+            background: #1bb57b;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .infobox-subtitle {
+            background: #18a06b;
+            color: white;
+            padding: 8px 15px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .infobox-content {
+            padding: 15px;
+        }
+
+        .infobox-row {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid #e6e6e6;
+            font-size: 14px;
+        }
+
+        .infobox-row:last-child {
+            border-bottom: none;
+        }
+
+        .infobox-label {
+            width: 70px;
+            font-weight: bold;
+            color: #666;
+            flex-shrink: 0;
+        }
+
+        .infobox-value {
+            flex: 1;
+            color: #333;
+        }
+
+        /* TOC */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+            padding: 15px 20px;
+            margin: 0 0 20px 0;
+            display: block;
+            width: fit-content;
+            min-width: 300px;
+        }
+
+        .toc-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .toc-list li a {
+            color: #1bb57b;
+            text-decoration: none;
+        }
+
+        .toc-list li a:hover {
+            text-decoration: underline;
+        }
+
+        .strikethrough {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        /* 상위 문서 링크 */
+        .parent-link {
+            background: #f0f0f0;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: block;
+            width: fit-content;
+        }
+
+        .parent-link a {
+            color: #1bb57b;
+            text-decoration: none;
+        }
+
+        .parent-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 바 -->
+    <div class="top-bar">
+        <a href="dolpa_math.html" class="logo">나무위키</a>
+    </div>
+
+    <!-- 메인 컨텐츠 -->
+    <div class="main-container">
+        <div class="content-wrapper">
+            <!-- 제목 영역 -->
+            <div class="title-section">
+                <h1 class="page-title">이유진(선생님)</h1>
+                <div class="page-info">최근 수정 시각: 2026-01-30 13:22:15</div>
+            </div>
+
+            <!-- 분류 -->
+            <div class="category-section">
+                <span class="category-label">분류:</span>
+                <a href="#" class="category-link">인물</a>
+            </div>
+
+            <!-- 본문 컨텐츠 -->
+            <div class="content-area">
+                <!-- 상위 문서 -->
+                <div class="parent-link">
+                    상위 문서: <a href="dolpa_math.html">돌파수학</a>
+                </div>
+
+                <!-- 목차 -->
+                <div class="toc">
+                    <div class="toc-title">목차</div>
+                    <ul class="toc-list">
+                        <li><a href="#section1">1. 개요</a></li>
+                        <li><a href="#section2">2. 여담</a></li>
+                    </ul>
+                </div>
+
+                <!-- 인물 정보 박스 -->
+                <div class="infobox">
+                    <div class="infobox-title">이유진</div>
+                    <div class="infobox-subtitle">Lee Yujin</div>
+                    <div class="infobox-content">
+                        <div class="infobox-row">
+                            <div class="infobox-label">출생</div>
+                            <div class="infobox-value">199?년 (27살~35살)</div>
+                        </div>
+                        <div class="infobox-row">
+                            <div class="infobox-label">신체</div>
+                            <div class="infobox-value">17?cm｜??kg</div>
+                        </div>
+                        <div class="infobox-row">
+                            <div class="infobox-label">소속</div>
+                            <div class="infobox-value">
+                                생각하는 수학 (201? ~ 202?)<br>
+                                <a href="dolpa_math.html" class="internal-link">돌파수학</a> (202? ~ 현재)
+                            </div>
+                        </div>
+                        <div class="infobox-row">
+                            <div class="infobox-label">학력</div>
+                            <div class="infobox-value">
+                                휘문고등학교 (졸업)<br>
+                                이화여자대학교 수학과 (졸업)
+                            </div>
+                        </div>
+                        <div class="infobox-row">
+                            <div class="infobox-label">병역</div>
+                            <div class="infobox-value">대한민국 해병대 제??사단 병장 만기전역</div>
+                        </div>
+                        <div class="infobox-row">
+                            <div class="infobox-label">별명</div>
+                            <div class="infobox-value">주먹밥쿵야, 마자용 등</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 1. 개요 -->
+                <h2 class="wiki-heading" id="section1">1. 개요 <a href="#" class="edit-btn">[편집]</a></h2>
+                <div class="wiki-paragraph">
+                    <a href="dolpa_math.html" class="internal-link">돌파수학</a>학원의 강사.
+                </div>
+
+                <!-- 2. 여담 -->
+                <h2 class="wiki-heading" id="section2">2. 여담 <a href="#" class="edit-btn">[편집]</a></h2>
+                <ul class="wiki-list">
+                    <li>드르륵을 하지 못한다.</li>
+                    <li>수업 중 강의를 자주 부순다.</li>
+                    <li><span class="strikethrough">학생에게 이노무쉐키라고 하기도 한다.</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

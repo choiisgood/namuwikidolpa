@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>돌파수학 - 나무위키</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", sans-serif;
+            background-color: #fff;
+            color: #000;
+            line-height: 1.7;
+        }
+
+        /* 헤더 */
+        .top-bar {
+            background-color: #1bb57b;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* 메인 컨텐츠 */
+        .main-container {
+            max-width: 1400px;
+            margin: 70px auto 0;
+            padding: 0 20px;
+        }
+
+        .content-wrapper {
+            background: white;
+            border: 1px solid #e6e6e6;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .title-section {
+            padding: 30px 30px 20px;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .page-info {
+            color: #666;
+            font-size: 13px;
+        }
+
+        .action-bar {
+            display: flex;
+            gap: 10px;
+            padding: 15px 30px;
+            border-bottom: 1px solid #e6e6e6;
+            background: #fafafa;
+        }
+
+        .action-btn {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #333;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .action-btn:hover {
+            background: #f5f5f5;
+        }
+
+        /* 분류 */
+        .category-section {
+            padding: 15px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .category-label {
+            font-size: 13px;
+            color: #666;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .category-link {
+            color: #1bb57b;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .category-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 컨텐츠 영역 */
+        .content-area {
+            padding: 30px;
+        }
+
+        .wiki-heading {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 30px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #1bb57b;
+        }
+
+        .wiki-heading:first-child {
+            margin-top: 0;
+        }
+
+        .wiki-heading .edit-btn {
+            font-size: 12px;
+            color: #1bb57b;
+            text-decoration: none;
+            margin-left: 8px;
+            font-weight: normal;
+        }
+
+        .wiki-paragraph {
+            margin: 12px 0;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .wiki-list {
+            margin: 15px 0 15px 30px;
+        }
+
+        .wiki-list li {
+            margin: 8px 0;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .internal-link {
+            color: #1bb57b;
+            text-decoration: none;
+        }
+
+        .internal-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 이미지 플레이스홀더 */
+        .image-placeholder {
+            margin: 20px 0;
+            padding: 40px;
+            background: #f8f9fa;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+            text-align: center;
+            color: #999;
+        }
+
+        .image-caption {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        /* TOC */
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #e6e6e6;
+            border-radius: 4px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            display: inline-block;
+            min-width: 300px;
+        }
+
+        .toc-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .toc-list li a {
+            color: #1bb57b;
+            text-decoration: none;
+        }
+
+        .toc-list li a:hover {
+            text-decoration: underline;
+        }
+
+        .toc-sub {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 바 -->
+    <div class="top-bar">
+        <a href="dolpa_math.html" class="logo">나무위키</a>
+    </div>
+
+    <!-- 메인 컨텐츠 -->
+    <div class="main-container">
+        <div class="content-wrapper">
+            <!-- 제목 영역 -->
+            <div class="title-section">
+                <h1 class="page-title">돌파수학</h1>
+                <div class="page-info">최근 수정 시각: 2026-01-30 12:45:30</div>
+            </div>
+
+            <!-- 분류 -->
+            <div class="category-section">
+                <span class="category-label">분류:</span>
+                <a href="#" class="category-link">학원</a>
+            </div>
+
+            <!-- 본문 컨텐츠 -->
+            <div class="content-area">
+                <!-- 목차 -->
+                <div class="toc">
+                    <div class="toc-title">목차</div>
+                    <ul class="toc-list">
+                        <li><a href="#section1">1. 개요</a></li>
+                        <li><a href="#section2">2. 창립</a></li>
+                        <li><a href="#section3">3. 위치</a></li>
+                        <li><a href="#section4">4. 특징</a></li>
+                        <li><a href="#section5">5. 관련 인물</a>
+                            <ul class="toc-sub">
+                                <li><a href="#lee-yujin">5.1. 이유진</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 1. 개요 -->
+                <h2 class="wiki-heading" id="section1">1. 개요 <a href="#" class="edit-btn">[편집]</a></h2>
+                <div class="wiki-paragraph">
+                    대한민국의 수학학원
+                </div>
+                <div class="wiki-paragraph">
+                    대치동에서 선행학습, 내신대비를 진행한다.
+                </div>
+
+                <!-- 2. 창립 -->
+                <h2 class="wiki-heading" id="section2">2. 창립 <a href="#" class="edit-btn">[편집]</a></h2>
+                <div class="wiki-paragraph">
+                    2021년 6월 21일 창립.
+                </div>
+
+                <!-- 3. 위치 -->
+                <h2 class="wiki-heading" id="section3">3. 위치 <a href="#" class="edit-btn">[편집]</a></h2>
+                <div class="wiki-paragraph">
+                    서울시 강남구 대치동 908-8<br>
+                    역삼로 416
+                </div>
+                <div class="wiki-paragraph">
+                    선릉역과 한티역 정 중앙에 위치하며,<br>
+                    버스로는 도성초교사거리역, 도성초등학교역을 이용할 수 있다.
+                </div>
+
+                <!-- 4. 특징 -->
+                <h2 class="wiki-heading" id="section4">4. 특징 <a href="#" class="edit-btn">[편집]</a></h2>
+                
+                <div class="image-placeholder">
+                    📅 [이미지]
+                    <div class="image-caption">돌파수학학원의 시간표이다.<br>돌파수학시간표</div>
+                </div>
+
+                <ul class="wiki-list">
+                    <li>원장은 이주형T와 노동현T이다.</li>
+                    <li>둘 다 생각하는 수학학원(생수)에서 나와 새로운 학원을 설립했다. 이주형 선생님은 서울대 수학교육과 출신이다. 매년 번갈아가면서 가장 높은 반을 담당한다. 2022년도에는 이주형선생님이 가장 높은 반을 운영하였다. 이주형 선생님과 노동현 선생님은 잘 가르치는 것으로 알려져 있다.</li>
+                    <li>임홍섭 선생님 역시나 생각하는 수학학원(생수)에서 나와 돌파수학학원에서 부원장을 담당하고 있으며 방학특강에서는 이주형 선생님이 수2와 미적분, 노동현 선생님이 수1, 임홍섭 선생님이 수상하를 맡고 있다.</li>
+                    <li>돌파수학학원은 중학생 때 고등학교 교과과정을 선행하기 좋아 굉장히 유명해졌다. 특히, 개념은 수학의 정석등의 교과서로 정리하고 킬러문제를 푸는등 문제풀이 중심의 학원으로써 매일 누적 모의고사도 본다. 물론, 생각하는 수학학원도 매우 유사하다.</li>
+                    <li>전체적으로 정리하면, 선생님들도 좋고 누적 모의고사와 킬러문제를 통한 문제풀이 능력을 높여서 고등학교 교과과정을 진행하는데는 큰 도움을 줄 수 있다고 평가받는다.</li>
+                    <li>원래는 돌파수학의 이름을 노동현T의 '동'과 이주형T의 '주'를 합쳐서 동주수학이라고 하려 했다. 그러나 이주형T의 반대로 이름이 변경되었다.</li>
+                </ul>
+
+                <!-- 5. 관련 인물 -->
+                <h2 class="wiki-heading" id="section5">5. 관련 인물 <a href="#" class="edit-btn">[편집]</a></h2>
+                
+                <h3 class="wiki-heading" id="lee-yujin" style="font-size: 18px; border-bottom: 1px solid #ddd;">5.1. <a href="lee_yujin.html" class="internal-link">이유진(선생님)</a> <a href="#" class="edit-btn">[편집]</a></h3>
+                <div class="wiki-paragraph">
+                    <a href="lee_yujin.html" class="internal-link">이유진</a> 문서를 참고하십시오.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
